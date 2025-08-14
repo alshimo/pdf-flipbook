@@ -1,0 +1,22 @@
+{
+  "name": "pdf-flipbook",
+  "version": "1.0.0",
+  "description": "A tool that accepts a PDF file URL and displays it as a flipbook",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite preview"
+  },
+  "dependencies": {
+    "page-flip": "^2.0.7",
+    "pdfjs-dist": "^4.0.379"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "keywords": ["pdf", "flipbook", "page-flip", "pdfjs"],
+  "author": "Alen Shirmo",
+  "license": "MIT"
+}
