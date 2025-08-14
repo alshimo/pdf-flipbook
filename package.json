@@ -19,5 +19,8 @@
   },
   "keywords": ["pdf", "flipbook", "page-flip", "pdfjs"],
   "author": "Alen Shirmo",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
