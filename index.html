@@ -12,82 +12,69 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Georgia', 'Times New Roman', serif;
             min-height: 100vh;
+            background: #1a1a1a;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            color: #f0f0f0;
+        }
+
+        .url-input-container {
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
             padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            position: relative;
+            display: none;
         }
 
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .input-section {
-            padding: 30px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
+        .url-input-container.show {
+            display: block;
         }
 
         .url-input {
             display: flex;
             gap: 15px;
-            margin-bottom: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .url-input input {
             flex: 1;
             padding: 15px 20px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
+            border: 2px solid #444;
+            border-radius: 8px;
             font-size: 16px;
             transition: border-color 0.3s ease;
+            background: #2a2a2a;
+            color: #f0f0f0;
         }
 
         .url-input input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
         }
 
         .url-input button {
             padding: 15px 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            color: #1a1a1a;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-family: 'Georgia', serif;
         }
 
         .url-input button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
         }
 
         .url-input button:disabled {
@@ -96,20 +83,106 @@
             transform: none;
         }
 
-        .loading {
+        .flipbook-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            background: radial-gradient(ellipse at center, #2a2a2a 0%, #1a1a1a 100%);
+        }
+
+        #flipbook {
+            width: 1400px;
+            height: 1000px;
+            margin: 0 auto;
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #f8f5f0;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            position: relative;
+        }
+
+        .flipbook-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            z-index: 1000;
+        }
+
+        .nav-button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-info {
+            color: #f0f0f0;
+            font-weight: 500;
+            min-width: 120px;
             text-align: center;
-            padding: 20px;
-            color: #666;
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #d4af37;
+            z-index: 100;
+            font-family: 'Georgia', serif;
         }
 
         .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
+            border: 4px solid rgba(212, 175, 55, 0.2);
+            border-top: 4px solid #d4af37;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+            margin: 0 auto 20px;
         }
 
         @keyframes spin {
@@ -117,121 +190,179 @@
             100% { transform: rotate(360deg); }
         }
 
-        .flipbook-container {
+        .error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139, 69, 19, 0.9);
+            color: #f0f0f0;
+            padding: 30px 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            z-index: 100;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            font-family: 'Georgia', serif;
+        }
+
+        .bottom-controls {
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
             padding: 20px;
-            min-height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        #flipbook {
-            width: 100%;
-            height: 600px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .error {
-            color: #dc3545;
-            text-align: center;
-            padding: 20px;
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            border-radius: 10px;
-            margin: 20px;
-        }
-
-        .example-urls {
-            margin-top: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-        }
-
-        .example-urls h3 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .example-urls ul {
-            list-style: none;
-        }
-
-        .example-urls li {
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .example-urls li:hover {
-            background: #e9ecef;
-        }
-
-        .example-urls a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .controls {
-            padding: 20px;
-            text-align: center;
-            background: #f8f9fa;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .controls button {
-            margin: 0 10px;
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
+        .download-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            color: #f0f0f0;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.5px;
         }
 
-        .controls button:hover {
-            background: #5a6fd8;
+        .download-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
         }
 
-        .controls button:disabled {
-            background: #ccc;
+        .download-button:disabled {
+            opacity: 0.4;
             cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Turn.js specific styles */
+        #flipbook .page {
+            background: #f8f5f0;
+            background-size: 100% 100%;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        #flipbook .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            display: block;
+        }
+
+        /* Turn.js page wrapper styles */
+        #flipbook .page-wrapper {
+            background: #f8f5f0;
+            position: relative;
+        }
+
+        /* Turn.js specific page classes */
+        #flipbook .turn-page {
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        #flipbook .turn-page-wrapper {
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        /* Remove any conflicting styles */
+        #flipbook * {
+            pointer-events: auto;
+        }
+
+        #flipbook .page img {
+            pointer-events: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1500px) {
+            #flipbook {
+                width: 1200px;
+                height: 857px;
+            }
+        }
+
+        @media (max-width: 1300px) {
+            #flipbook {
+                width: 1000px;
+                height: 714px;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            #flipbook {
+                width: 800px;
+                height: 571px;
+            }
+            
+            .flipbook-controls {
+                bottom: 20px;
+                padding: 12px 24px;
+            }
+            
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .url-input {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            #flipbook {
+                width: 90vw;
+                height: 64vw;
+                max-height: 70vh;
+            }
+            
+            .flipbook-controls {
+                bottom: 15px;
+                padding: 10px 20px;
+                gap: 15px;
+            }
+            
+            .nav-button {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .page-info {
+                font-size: 14px;
+                min-width: 100px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>📖 PDF Flipbook</h1>
-            <p>Transform any PDF into an interactive flipbook experience</p>
+    <div class="url-input-container" id="urlInputContainer">
+        <div class="url-input">
+            <input type="url" id="pdfUrl" placeholder="Enter PDF URL (e.g., https://example.com/document.pdf)" />
+            <button id="loadBtn" onclick="loadPDF()">Load PDF</button>
         </div>
+    </div>
 
-        <div class="input-section">
-            <div class="url-input">
-                <input type="url" id="pdfUrl" placeholder="Enter PDF URL (e.g., https://example.com/document.pdf)" />
-                <button id="loadBtn" onclick="loadPDF()">Load PDF</button>
-            </div>
-
-            <div class="example-urls">
-                <h3>Try these example PDFs:</h3>
-                <ul>
-                    <li onclick="loadExample('https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf')">
-                        📄 Sample PDF (Mozilla PDF.js demo)
-                    </li>
-                    <li onclick="loadExample('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf')">
-                        📄 Dummy PDF (W3C test file)
-                    </li>
-                </ul>
-            </div>
-        </div>
-
+    <div class="flipbook-container">
         <div id="loading" class="loading" style="display: none;">
             <div class="spinner"></div>
             <p>Loading PDF and creating flipbook...</p>
@@ -239,17 +370,26 @@
 
         <div id="error" class="error" style="display: none;"></div>
 
-        <div class="flipbook-container">
-            <div id="flipbook"></div>
-        </div>
-
-        <div class="controls">
-            <button onclick="previousPage()" id="prevBtn" disabled>Previous</button>
-            <span id="pageInfo">Page 0 of 0</span>
-            <button onclick="nextPage()" id="nextBtn" disabled>Next</button>
+        <div id="flipbook"></div>
+        
+        <div class="flipbook-controls">
+            <button class="nav-button" onclick="previousPage()" id="prevBtn" disabled>‹</button>
+            <span class="page-info" id="pageInfo">Page 0 of 0</span>
+            <button class="nav-button" onclick="nextPage()" id="nextBtn" disabled>›</button>
         </div>
     </div>
 
+    <div class="bottom-controls">
+        <button class="download-button" onclick="downloadPDF()" id="downloadBtn" disabled>📄 Download PDF</button>
+    </div>
+
+    <!-- jQuery (required for turn.js) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Turn.js library (local) -->
+    <script src="/turn.min.js"></script>
+    
+    <!-- Custom implementation -->
     <script type="module" src="/src/main.js"></script>
 </body>
 </html>

@@ -11,6 +11,6 @@ export default defineConfig({
     sourcemap: true
   },
   optimizeDeps: {
-    include: ['pdfjs-dist', 'page-flip']
+    include: ['pdfjs-dist', 'jquery']
   }
 });
